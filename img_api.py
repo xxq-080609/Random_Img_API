@@ -25,8 +25,8 @@ class AvailableTypes(str, Enum):
 
 # app routes
 @app.get("/")
-async def main(type_filter: Union[str, None] = Query(default=None, regex=r"^(acg|wallpaper|avatar)$"),
-               size: Union[str, None] = Query(default=None, max_length=15, regex=r"^([1-9]\d*|\?)x([1-9]\d*|\?)$")):
+async def main(type_filter: Union[str, None] = Query(default=None, max_length=10, regex=r"^(acg|wallpaper|avatar)$"),
+               size: Union[str, None] = Query(default=None, max_length=10, regex=r"^([1-9]\d*|\?)x([1-9]\d*|\?)$")):
     """
     available parameters:
     type_filter: filter by type, default is none, accepts string, available options are "acg", "wallpaper", "avatar"
