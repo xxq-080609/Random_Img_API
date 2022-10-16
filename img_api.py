@@ -36,13 +36,13 @@ async def main(type_filter: Union[str, None] = Query(default=None, max_length=10
     print("type_filter: %s" % type_filter, "size: %s" % size)
     search_args = []
     if type_filter is not None:
-        search_args.append(f"TYPE = \"{type_filter}\"")
+        search_args.append(f"""TYPE = \"{type_filter}\"""")
     if size is not None:
         match_size = match(r"([1-9]\d*|\?)x([1-9]\d*|\?)", size)
         if match_size.group(1) != "?":
-            search_args.append(f"img_x = \"{match_size.group(1)}\"")
+            search_args.append(f"""img_x = \"{match_size.group(1)}\"""")
         if match_size.group(2) != "?":
-            search_args.append(f"img_y = \"{match_size.group(2)}\"")
+            search_args.append(f"""img_y = \"{match_size.group(2)}\"""")
     if len(search_args) == 0:
         res = cursor.execute("SELECT PATH, FORMAT FROM img")
     elif len(search_args) == 1:

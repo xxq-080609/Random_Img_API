@@ -14,12 +14,12 @@ def get_acg():
             context = requests.get("https://api.lolicon.app/setu/v2?size=original&size=regular&r18=0").text
             pid = json.loads(context)['data'][0]['pid']
             name = json.loads(context)['data'][0]['title']
-            rt = os.system(f"wget https://pixiv.cat/{pid}.jpg")
+            rt = os.system(f"""wget https://pixiv.cat/{pid}.jpg""")
             if rt == 0:
-                img = Image.open(f'./{pid}.jpg')
+                img = Image.open(f"""./{pid}.jpg""")
                 img_x, img_y = img.size
                 cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)""",
-                               (name, 'acg', 'jpg', f'img/{pid}.jpg', img_x, img_y))
+                               (name, 'acg', 'jpg', f"""img/{pid}.jpg""", img_x, img_y))
                 database.commit()
         except KeyboardInterrupt:
             break
