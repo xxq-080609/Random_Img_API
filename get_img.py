@@ -42,17 +42,16 @@ def get_img():
         print("3. avatar")
         print("4. exit")
         choice = int(input("Enter choice: "))
-        match choice:
-            case 1:
-                get_acg()
-            case 2:
-                get_wallpaper()
-            case 3:
-                get_avatar()
-            case 4:
-                break
-            case _:
-                print("Invalid choice")
+        if choice == "1":
+            get_acg()
+        elif choice == "2":
+            get_wallpaper()
+        elif choice == "3":
+            get_avatar()
+        elif choice == "4":
+            break
+        else:
+            print("Invalid choice")
 
 
 if __name__ == "__main__":

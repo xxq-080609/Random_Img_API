@@ -74,19 +74,18 @@ def manage():
         print("2. Search")
         print("3. Exit")
         choice = int(input("Enter choice: "))
-        match choice:
-            # insert image
-            case 1:
-                scan_path()
+        # insert image
+        if choice == 1:
+            scan_path()
             # search
-            case 2:
-                search()
-            # exit
-            case 3:
-                break
-            # invalid input
-            case _:
-                print("Invalid choice")
+        elif choice == 2:
+            search()
+        # exit
+        elif choice == 3:
+            break
+        # invalid input
+        else:
+            print("Invalid choice")
 
 
 if __name__ == "__main__":
