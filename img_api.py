@@ -5,6 +5,7 @@ from re import match
 import sqlite3
 from random import choice
 from enum import Enum
+import os
 
 # init app
 app = FastAPI()
@@ -12,8 +13,11 @@ app = FastAPI()
 database = sqlite3.connect("img_info.sqlite3")
 # create cursor
 cursor = database.cursor()
+if not os.path.exists("img"):
+    os.mkdir("img")
 
-class availableTypes(str, Enum):
+
+class AvailableTypes(str, Enum):
     acg = "acg"
     wallpaper = "wallpaper"
     avatar = "avatar"
@@ -26,8 +30,8 @@ async def main(type_filter: Union[str, None] = Query(default=None, regex=r"^(acg
                name: Union[str, None] = Query(default=None, max_length=15)):
     """
     available parameters:
-    type_filter: filter by type, default is none, accepts context string, available options are "acg", "wallpaper", "avatar"
-    size: filter by size, default is none, accepts context string, format is [Number | ?]x[Number | ?], e.g. 1920x1080, 1920x?
+    type_filter: filter by type, default is none, accepts string, available options are "acg", "wallpaper", "avatar"
+    size: filter by size, default is none, accepts context string, format is [Number | ?]x[Number | ?], e.g. 1920x1080
     name: filter by img name, default is none, accepts context string
     """
     # SELECT PATH, FORMAT FROM img [WHERE] [type = ""] [AND_1] [name = ""] [AND_2} [img_x = ""] [AND_3] [img_y = ""]
@@ -42,11 +46,9 @@ async def main(type_filter: Union[str, None] = Query(default=None, regex=r"^(acg
             search_args.append(f"img_x = \"{match_size.group(1)}\"")
         if match_size.group(2) != "?":
             search_args.append(f"img_y = \"{match_size.group(2)}\"")
-    print(search_args)
     if len(search_args) == 0:
         res = cursor.execute("SELECT PATH, FORMAT FROM img")
     elif len(search_args) == 1:
-        print("SELECT PATH, FORMAT FROM img WHERE %s" % search_args[0])
         res = cursor.execute("SELECT PATH, FORMAT FROM img WHERE %s" % search_args[0])
     else:
         print("SELECT PATH, FORMAT FROM img WHERE %s" % " AND ".join(search_args))
