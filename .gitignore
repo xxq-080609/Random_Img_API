@@ -73,3 +73,7 @@ fabric.properties
 
 /img
 /img_info.sqlite3
+
+log.txt
+
+__pycache__
