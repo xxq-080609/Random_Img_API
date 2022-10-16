@@ -26,20 +26,16 @@ class AvailableTypes(str, Enum):
 # app routes
 @app.get("/")
 async def main(type_filter: Union[str, None] = Query(default=None, regex=r"^(acg|wallpaper|avatar)$"),
-               size: Union[str, None] = Query(default=None, max_length=15, regex=r"^([1-9]\d*|\?)x([1-9]\d*|\?)$"),
-               name: Union[str, None] = Query(default=None, max_length=15)):
+               size: Union[str, None] = Query(default=None, max_length=15, regex=r"^([1-9]\d*|\?)x([1-9]\d*|\?)$")):
     """
     available parameters:
     type_filter: filter by type, default is none, accepts string, available options are "acg", "wallpaper", "avatar"
     size: filter by size, default is none, accepts context string, format is [Number | ?]x[Number | ?], e.g. 1920x1080
-    name: filter by img name, default is none, accepts context string
     """
-    # SELECT PATH, FORMAT FROM img [WHERE] [type = ""] [AND_1] [name = ""] [AND_2} [img_x = ""] [AND_3] [img_y = ""]
+    # SELECT PATH, FORMAT FROM img [WHERE] [type = ""] [AND_1] [img_x = ""] [AND_2] [img_y = ""]
     search_args = []
     if type_filter is not None:
         search_args.append(f"TYPE = \"{type_filter}\"")
-    if name is not None:
-        search_args.append(f"NAME = \"{name}\"")
     if size is not None:
         match_size = match(r"([1-9]\d*|\?)x([1-9]\d*|\?)", size)
         if match_size.group(1) != "?":
