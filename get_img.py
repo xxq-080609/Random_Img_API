@@ -25,6 +25,14 @@ def get_acg():
             break
 
 
+def get_wallpaper():
+    pass
+
+
+def get_avatar():
+    pass
+
+
 def get_img():
     os.chdir("img")
     while True:
@@ -38,9 +46,9 @@ def get_img():
             case 1:
                 get_acg()
             case 2:
-                pass
+                get_wallpaper()
             case 3:
-                pass
+                get_avatar()
             case 4:
                 break
             case _:
