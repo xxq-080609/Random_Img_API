@@ -41,7 +41,8 @@ def get_img():
         print("2. wallpaper")
         print("3. avatar")
         print("4. exit")
-        choice = int(input("Enter choice: "))
+        choice = input("Enter choice: ")
+        print(choice)
         if choice == "1":
             get_acg()
         elif choice == "2":

@@ -33,6 +33,7 @@ async def main(type_filter: Union[str, None] = Query(default=None, max_length=10
     size: filter by size, default is none, accepts context string, format is [Number | ?]x[Number | ?], e.g. 1920x1080
     """
     # SELECT PATH, FORMAT FROM img [WHERE] [type = ""] [AND_1] [img_x = ""] [AND_2] [img_y = ""]
+    print("type_filter: %s" % type_filter, "size: %s" % size)
     search_args = []
     if type_filter is not None:
         search_args.append(f"TYPE = \"{type_filter}\"")
