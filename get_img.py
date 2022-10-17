@@ -82,7 +82,7 @@ def get_img():
 
 def init():
     os.chdir("img")
-    if len(sys.argv) != 1:
+    if len(sys.argv) != 2:
         print("""No options selected
         "get_img.py --help" for help""")
         exit()
