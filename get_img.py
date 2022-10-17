@@ -37,7 +37,7 @@ def get_wallpaper():
                 img = Image.open(f"""./wallpaper{num}.png""")
                 img_x, img_y = img.size
                 cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)""",
-                               (f"""wallpaper{num}""", 'wallpaper', 'png', f"""img/wallpaper{num}.png""", img_x, img_y))
+                               ("""wallpaper{num}""", 'wallpaper', 'png', f"""img/wallpaper{num}.png""", img_x, img_y))
                 database.commit()
         except KeyboardInterrupt:
             break
@@ -45,8 +45,8 @@ def get_wallpaper():
 
 def get_avatar():
     while True:
-        num = 0;
-        num += 1;
+        num = 0
+        num += 1
         try:
             generator = pydenticon.Generator(10, 10)
             avatar = generator.generate(str(num), 240, 240)
