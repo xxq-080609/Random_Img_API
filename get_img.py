@@ -2,8 +2,10 @@ import os
 import requests
 import sqlite3
 import json
+import pydenticon
 from PIL import Image
 from datetime import datetime
+
 
 database = sqlite3.connect("img_info.sqlite3")
 cursor = database.cursor()
@@ -35,15 +37,27 @@ def get_wallpaper():
                 img = Image.open(f"""./wallpaper{num}.png""")
                 img_x, img_y = img.size
                 cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)"""
-                               ("""wallpaper{num}""", 'acg', 'png', f"""img/wallpaper{num}.jpg""", img_x, img_y))
+                               ("""wallpaper{num}""", 'wallpaper', 'png', f"""img/wallpaper{num}.png""", img_x, img_y))
                 database.commit()
         except KeyboardInterrupt:
             break
 
 
 def get_avatar():
-    pass
-
+    while True:
+        num = 0;
+        num += 1;
+        try:
+            generator = pydenticon.Generator(10, 10)
+            avatar = generator.generate(str(num), 240, 240)
+            avatarwrite = open(f"""./avatar{num}.png""")
+            avatarwrite.write(avatar)
+            avatarwrite.close()
+            cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)"""
+                          ("""avatar{num}""", 'avatar', 'png', f"""img/avatar{num}.png""", 240, 240))
+            database.commit()
+        except KeyboardInterrupt:
+            break
 
 def get_img():
     os.chdir("img")
