@@ -36,7 +36,7 @@ def get_wallpaper():
             if rt == 0:
                 img = Image.open(f"""./wallpaper{num}.png""")
                 img_x, img_y = img.size
-                cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)"""
+                cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)""",
                                ("""wallpaper{num}""", 'wallpaper', 'png', f"""img/wallpaper{num}.png""", img_x, img_y)
                 database.commit()
         except KeyboardInterrupt:
@@ -53,7 +53,7 @@ def get_avatar():
             avatarwrite = open(f"""./avatar{num}.png""")
             avatarwrite.write(avatar)
             avatarwrite.close()
-            cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)"""
+            cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)""",
                           ("""avatar{num}""", 'avatar', 'png', f"""img/avatar{num}.png""", 240, 240))
             database.commit()
         except KeyboardInterrupt:
