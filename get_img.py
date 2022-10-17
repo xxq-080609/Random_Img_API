@@ -14,7 +14,7 @@ cursor = database.cursor()
 def get_acg():
     while True:
         try:
-            context = requests.get("https://api.lolicon.app/setu/v2?size=original&size=regular&r18=0").text
+            context = requests.get("https://api.lolicon.app/setu/v2?size=original&r18=1").text
             pid = json.loads(context)['data'][0]['pid']
             name = json.loads(context)['data'][0]['title']
             rt = os.system(f"""wget https://pixiv.cat/{pid}.jpg""")
@@ -45,8 +45,7 @@ def get_wallpaper():
 
 def get_avatar():
     while True:
-        num = 0;
-        num += 1;
+        num = int(round(datetime.now().timestamp() * 10000))
         try:
             generator = pydenticon.Generator(10, 10)
             avatar = generator.generate(str(num), 240, 240)
