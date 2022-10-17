@@ -85,22 +85,23 @@ def init():
     if len(sys.argv) != 1:
         print("""No options selected
         "get_img.py --help" for help""")
-    elif sys.argv[1] == "--help":
-        print("""Usage: get_img.py <options>
-        Options: 
-            --acg       : Get good images
-            --avatar    : Get avatars
-            --help      : Show this message
-            --wallpaper : Get wallpaper""")
-    elif sys.argv[1] == "--acg":
-        get_acg()
-    elif sys.argv[1] == "--avatar":
-        get_avatar()
-    elif sys.argv[1] == "--wallpaper":
-        get_wallpaper()
     else:
-        print("""Invalid choice
-        "get_img.py --help" for help""")
+        elif sys.argv[1] == "--help":
+            print("""Usage: get_img.py <options>
+            Options: 
+                --acg       : Get good images
+                --avatar    : Get avatars
+                --help      : Show this message
+               --wallpaper : Get wallpaper""")
+        elif sys.argv[1] == "--acg":
+            get_acg()
+        elif sys.argv[1] == "--avatar":
+            get_avatar()
+        elif sys.argv[1] == "--wallpaper":
+            get_wallpaper()
+        else:
+            print("""Invalid choice
+            "get_img.py --help" for help""")
         
         
 
