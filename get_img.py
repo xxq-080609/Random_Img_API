@@ -28,7 +28,7 @@ def get_acg():
 
 def get_wallpaper():
     while True:
-        num = datetime.now()
+        num = datetime.now().timestamp()
         try:
             rt = os.system(f"""wget -O wallpaper{num}.png https://unsplash.it/1920/1080?random""")
             if rt == 0:
