@@ -11,7 +11,7 @@ cursor = database.cursor()
 def get_acg():
     while True:
         try:
-            context = requests.get("https://api.lolicon.app/setu/v2?size=original&size=regular&r18=1").text
+            context = requests.get("https://api.lolicon.app/setu/v2?size=original&size=regular&r18=0").text
             pid = json.loads(context)['data'][0]['pid']
             name = json.loads(context)['data'][0]['title']
             rt = os.system(f"""wget https://pixiv.cat/{pid}.jpg""")
@@ -34,7 +34,7 @@ def get_wallpaper():
             if rt == 0:
                 img = Image.open(f"""./wallpaper{num}.png""")
                 img_x, img_y = img.size
-                cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)"""
+                cursor.execute("""INSERT INTO img VALUES (?, ?, ?, ?, ?, ?)""",
                                ("""wallpaper{num}""", 'acg', 'png', f"""img/wallpaper{num}.jpg""", img_x, img_y))
                 database.commit()
         except KeyboardInterrupt:
