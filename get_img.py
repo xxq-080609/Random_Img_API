@@ -85,8 +85,9 @@ def init():
     if len(sys.argv) != 1:
         print("""No options selected
         "get_img.py --help" for help""")
+        exit()
     else:
-        elif sys.argv[1] == "--help":
+        if sys.argv[1] == "--help":
             print("""Usage: get_img.py <options>
             Options: 
                 --acg       : Get good images
