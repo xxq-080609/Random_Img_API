@@ -3,6 +3,7 @@ import requests
 import sqlite3
 import json
 from PIL import Image
+from datetime import datetime
 
 database = sqlite3.connect("img_info.sqlite3")
 cursor = database.cursor()
@@ -27,8 +28,7 @@ def get_acg():
 
 def get_wallpaper():
     while True:
-        num = 0
-        num += 1
+        num = datetime.now()
         try:
             rt = os.system(f"""wget -O wallpaper{num}.png https://unsplash.it/1920/1080?random""")
             if rt == 0:
